@@ -1,0 +1,19 @@
+capi-media-wav-player (0.1.0-7) unstable; urgency=low
+
+  * update parameter check code
+  * Git: api/wav-player
+  * Tag: capi-media-wav-player_0.1.0-7
+
+ -- Seungkeun Lee <sngn.lee@samsung.com>  Wed, 21 Dec 2011 20:08:50 +0900
+
+capi-media-wav-player (0.1.0-6) unstable; urgency=low
+
+  * update version
+
+ -- Seungkeun Lee <sngn.lee@samsung.com>  Thu, 15 Dec 2011 12:56:57 +0900
+
+capi-media-wav-player (0.0.1-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Seungkeun Lee <sngn.lee@samsung.com>  Wed, 07 Dec 2011 12:54:34 +0900
