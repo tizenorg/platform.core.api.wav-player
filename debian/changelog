@@ -1,3 +1,11 @@
+capi-media-wav-player (0.1.0-8) unstable; urgency=low
+
+  * add so version
+  * Git: slp/api/wav-player
+  * Tag: capi-media-wav-player_0.1.0-8
+
+ -- Seungkeun Lee <sngn.lee@samsung.com>  Tue, 14 Feb 2012 17:00:57 +0900
+
 capi-media-wav-player (0.1.0-7) unstable; urgency=low
 
   * update parameter check code
