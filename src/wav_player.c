@@ -36,7 +36,7 @@ typedef struct _cb_data_{
 
 
 
-int _convert_wav_player_error_code(const char *func, int code){
+static int __convert_wav_player_error_code(const char *func, int code){
 	int ret = WAV_PLAYER_ERROR_INVALID_OPERATION;
 	char *errorstr = NULL;
 	switch(code)
@@ -69,7 +69,7 @@ int _convert_wav_player_error_code(const char *func, int code){
 }
 
 
-void _internal_complete_cb(void *user_data){
+static void __internal_complete_cb(void *user_data){
 	_cb_data * cb_data = (_cb_data*)user_data;
 	if(!cb_data)
 		return;
@@ -90,10 +90,10 @@ int wav_player_start(const char *path,  sound_type_e type , wav_player_playback_
 	
 	
 	if( path == NULL)
-		return _convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_PARAMETER);
+		return __convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_PARAMETER);
 
 	if( type < SOUND_TYPE_SYSTEM || type >  SOUND_TYPE_CALL )
-		return _convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_PARAMETER);
+		return __convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_PARAMETER);
 
 	m_path[0] = '\0';
 	if( path[0] != '/' ){
@@ -105,10 +105,10 @@ int wav_player_start(const char *path,  sound_type_e type , wav_player_playback_
 	strncat(m_path, path, PATH_MAX-strlen(m_path));
 
 	if( cb ){
-		_completed_cb = _internal_complete_cb;
+		_completed_cb = __internal_complete_cb;
 		cb_data = (_cb_data *)malloc(sizeof(_cb_data));
 		if(cb_data == NULL )
-			return _convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_OPERATION);
+			return __convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_OPERATION);
 		cb_data->cb = cb;
 		cb_data->uesr_data = user_data;		
 	}
@@ -123,10 +123,10 @@ int wav_player_start(const char *path,  sound_type_e type , wav_player_playback_
 		free(cb_data);
 
 			
-	return _convert_wav_player_error_code(__func__, ret);
+	return __convert_wav_player_error_code(__func__, ret);
 }
 
 int wav_player_stop(int id){
-	return _convert_wav_player_error_code(__func__, mm_sound_stop_sound(id));
+	return __convert_wav_player_error_code(__func__, mm_sound_stop_sound(id));
 }
 
