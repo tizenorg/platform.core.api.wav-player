@@ -7,12 +7,12 @@ Build-Depends: debhelper (>= 5), libmm-sound-dev , capi-base-common-dev , dlog-d
 
 Package: capi-media-wav-player
 Architecture: any
-Depends: ${shilbs:Depends}, ${misc:Depends} , libmm-sound-0
+Depends: ${shilbs:Depends}, ${misc:Depends} 
 Description: A wav player library in Tizen Native API
 
 Package: capi-media-wav-player-dev
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, capi-media-wav-player (= ${Source-Version}), dlog-dev, capi-base-common-dev, libmm-sound-dev
+Depends: ${shlibs:Depends}, ${misc:Depends}, capi-media-wav-player (= ${Source-Version}), capi-base-common-dev, capi-media-sound-manager-dev
 Description: A wav player library in Tizen Native API (DEV)
 
 Package: capi-media-wav-player-dbg

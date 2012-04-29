@@ -25,6 +25,7 @@ SET(submodule "wav-player")
 
 # for package file
 SET(dependents "mm-sound dlog capi-base-common capi-media-sound-manager")
+SET(pc_dependents "capi-base-common capi-media-sound-manager")
 
 SET(fw_name "${project_prefix}-${service}-${submodule}")
 
@@ -76,9 +77,8 @@ INSTALL(
         )
 
 SET(PC_NAME ${fw_name})
-SET(PC_REQUIRED ${dependents})
+SET(PC_REQUIRED ${pc_dependents})
 SET(PC_LDFLAGS -l${fw_name})
-SET(PC_CFLAGS -I\${includedir}/${service})
 
 CONFIGURE_FILE(
     ${fw_name}.pc.in
