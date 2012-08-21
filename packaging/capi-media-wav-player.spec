@@ -1,9 +1,10 @@
+#sbs-git:slp/api/wav-player capi-media-wav-player 0.1.0 8d904bb3bd0ca7fa01ebd8f4185e4b993d94c08d
 Name:       capi-media-wav-player
-Summary:    A wav player library in Tizen Native API
-Version:    0.1.0
+Summary:    A wav player library in SLP C API
+Version: 0.1.0
 Release:    10
 Group:      TO_BE/FILLED_IN
-License:    Apache-2.0
+License:    TO BE FILLED IN
 Source0:    %{name}-%{version}.tar.gz
 BuildRequires:  cmake
 BuildRequires:  pkgconfig(mm-sound)
@@ -17,7 +18,7 @@ Requires(postun): /sbin/ldconfig
 
 
 %package devel
-Summary:  A wav player library in Tizen Native API (Development)
+Summary:  A wav player library in SLP C API (Development)
 Group:    TO_BE/FILLED_IN
 Requires: %{name} = %{version}-%{release}
 
