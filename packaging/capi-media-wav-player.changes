@@ -1,0 +1,2 @@
+* Thu May 30 2013 Baptiste DURAND <baptiste.durand@eurogiciel.fr> accepted/tizen/20130520.100850@822bcad
+- Fix hardcoded library path for rpath
