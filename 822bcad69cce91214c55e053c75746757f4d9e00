@@ -1,0 +1,8 @@
+Change-Id: I822bcad69cce91214c55e053c75746757f4d9e00
+Code-Review+2: Anas Nashif
+Verified+1: Baptiste DURAND <baptiste.durand@eurogiciel.fr>
+Submitted-by: Anas Nashif
+Submitted-at: Fri, 31 May 2013 14:01:59 -0700
+Reviewed-on: https://review.tizen.org/gerrit/3770
+Project: platform/core/api/wav-player
+Branch: refs/heads/tizen
