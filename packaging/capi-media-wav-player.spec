@@ -5,6 +5,7 @@ Release:    16
 Group:      Multimedia/API
 License:    Apache-2.0
 Source0:    %{name}-%{version}.tar.gz
+Source1001: 	capi-media-wav-player.manifest
 BuildRequires:  cmake
 BuildRequires:  pkgconfig(mm-sound)
 BuildRequires:  pkgconfig(dlog)
@@ -27,6 +28,7 @@ Requires: %{name} = %{version}-%{release}
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 
 %build
@@ -44,11 +46,13 @@ make %{?jobs:-j%jobs}
 
 
 %files
+%manifest %{name}.manifest
 %license LICENSE.APLv2
 %{_libdir}/libcapi-media-wav-player.so.*
 %manifest capi-media-wav-player.manifest
 
 %files devel
+%manifest %{name}.manifest
 %{_includedir}/media/*.h
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/libcapi-media-wav-player.so
