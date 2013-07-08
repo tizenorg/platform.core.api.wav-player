@@ -1,0 +1,8 @@
+Change-Id: I4a4da55395bef33c87ea8a0704d19dda43073cb1
+Code-Review+2: Ryan Ware <ware@linux.intel.com>
+Verified+1: Ryan Ware <ware@linux.intel.com>
+Submitted-by: Ryan Ware <ware@linux.intel.com>
+Submitted-at: Mon, 08 Jul 2013 10:08:10 -0700
+Reviewed-on: https://review.tizen.org/gerrit/4427
+Project: platform/core/api/wav-player
+Branch: refs/heads/tizen
