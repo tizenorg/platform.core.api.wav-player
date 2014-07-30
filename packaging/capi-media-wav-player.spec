@@ -1,11 +1,11 @@
 Name:       capi-media-wav-player
 Summary:    A wav player library in Tizen C API
-Version: 0.1.0
-Release:    16
+Version:    0.1.0
+Release:    0
 Group:      Multimedia/API
 License:    Apache-2.0
 Source0:    %{name}-%{version}.tar.gz
-Source1001: 	capi-media-wav-player.manifest
+Source1001:     capi-media-wav-player.manifest
 BuildRequires:  cmake
 BuildRequires:  pkgconfig(mm-sound)
 BuildRequires:  pkgconfig(dlog)
@@ -15,7 +15,6 @@ BuildRequires:  pkgconfig(capi-media-sound-manager)
 %description
 A wav player library in Tizen C API.
 
-
 %package devel
 Summary:  A wav player library in Tizen C API (Development)
 Group:    Development/Multimedia
@@ -24,18 +23,14 @@ Requires: %{name} = %{version}-%{release}
 %description devel
 %devel_desc
 
-
-
 %prep
 %setup -q
 cp %{SOURCE1001} .
 
-
 %build
 MAJORVER=`echo %{version} | awk 'BEGIN {FS="."}{print $1}'`
 %cmake . -DFULLVER=%{version} -DMAJORVER=${MAJORVER}
-
-make %{?jobs:-j%jobs}
+%__make %{?jobs:-j%jobs}
 
 %install
 %make_install
@@ -44,12 +39,10 @@ make %{?jobs:-j%jobs}
 
 %postun -p /sbin/ldconfig
 
-
 %files
 %manifest %{name}.manifest
 %license LICENSE.APLv2
 %{_libdir}/libcapi-media-wav-player.so.*
-%manifest capi-media-wav-player.manifest
 
 %files devel
 %manifest %{name}.manifest
