@@ -1,0 +1,9 @@
+Code-Review+2: Casey Schaufler <casey.schaufler@intel.com>
+Code-Review+1: ronan(Eurogiciel) Le Martret <ronan.lemartret@open.eurogiciel.org>
+Verified+1: ronan(Eurogiciel) Le Martret <ronan.lemartret@open.eurogiciel.org>
+Code-Review+1: Philippe Coval <philippe.coval@open.eurogiciel.org>
+Submitted-by: Casey Schaufler <casey.schaufler@intel.com>
+Submitted-at: Wed, 27 Aug 2014 09:10:45 -0700
+Reviewed-on: https://review.tizen.org/gerrit/25166
+Project: platform/core/api/wav-player
+Branch: refs/heads/tizen
