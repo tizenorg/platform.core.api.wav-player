@@ -45,10 +45,11 @@ extern "C"
  */
 typedef enum
 {
-    WAV_PLAYER_ERROR_NONE        = TIZEN_ERROR_NONE,                      /**< Successful */
-    WAV_PLAYER_ERROR_INVALID_PARAMETER = TIZEN_ERROR_INVALID_PARAMETER,       /**< Invalid parameter */
-    WAV_PLAYER_ERROR_INVALID_OPERATION = TIZEN_ERROR_INVALID_OPERATION,       /**< Invalid operation */
-    WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED = WAV_PLAYER_ERROR_CLASS | 0x01 			  /**< Not supported format */
+    WAV_PLAYER_ERROR_NONE                 = TIZEN_ERROR_NONE,                  /**< Successful */
+    WAV_PLAYER_ERROR_INVALID_PARAMETER    = TIZEN_ERROR_INVALID_PARAMETER,     /**< Invalid parameter */
+    WAV_PLAYER_ERROR_INVALID_OPERATION    = TIZEN_ERROR_INVALID_OPERATION,     /**< Invalid operation */
+    WAV_PLAYER_ERROR_NOT_SUPPORTED        = TIZEN_ERROR_NOT_SUPPORTED,         /**< Not supported (Since 2.4) */
+    WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED = TIZEN_ERROR_WAV_PLAYER | 0x01      /**< Format not supported */
 } wav_player_error_e;
 
 /**
@@ -73,8 +74,10 @@ typedef void (*wav_player_playback_completed_cb)(int id, void *user_data);
 
 
 /**
+ * @deprecated Deprecated since 2.4. [Use wav_player_start_with_stream_info() instead]
  * @brief Plays a WAV file.
- * @param[in] path	The WAV file path to play
+ * @since_tizen 2.3
+ * @param[in] path	The file path to play
  * @param[in] type	The sound type
  * @param[in] callback	The callback function to invoke when a WAV file is finished playing
  * @param[in] user_data	The user data to be passed to the callback function
@@ -90,6 +93,30 @@ typedef void (*wav_player_playback_completed_cb)(int id, void *user_data);
  * @see wav_player_playback_completed_cb()
  */
 int wav_player_start(const char *path, sound_type_e type, wav_player_playback_completed_cb callback, void *user_data, int *id);
+
+/**
+ * @brief Plays a WAV file with stream information of sound-manager.
+ * @since_tizen 2.4
+ * @param[in] path	The file path to play
+ * @param[in] stream_info	The sound stream information handle
+ * @param[in] callback	The callback function to be invoked when a WAV file is no longer being played
+ * @param[in] user_data	The user data to be passed to the callback function
+ * @param[out] id	The WAV player ID (can be set to @c NULL)
+ *
+ * @return @c 0 on success,
+ *         otherwise a negative error value
+ * @retval #WAV_PLAYER_ERROR_NONE Successful
+ * @retval #WAV_PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
+ * @retval #WAV_PLAYER_ERROR_INVALID_OPERATION Invalid operation
+ * @retval #WAV_PLAYER_ERROR_NOT_SUPPORTED Not supported
+ *
+ * @post	It invokes wav_player_playback_completed_cb() when a WAV file is no longer being played.
+ * @see wav_player_stop()
+ * @see wav_player_playback_completed_cb()
+ * @see sound_manager_create_stream_information()
+ * @see sound_manager_destroy_stream_information()
+ */
+int wav_player_start_with_stream_info(const char *path, sound_stream_info_h stream_info, wav_player_playback_completed_cb callback, void *user_data, int *id);
 
 /**
  * @brief Stops playing the WAV file.
