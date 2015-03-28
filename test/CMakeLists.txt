@@ -7,7 +7,7 @@ FOREACH(flag ${${fw_test}_CFLAGS})
     MESSAGE(${flag})
 ENDFOREACH()
 
-SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} -Wall")
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} -Wall -pie")
 
 #ADD_EXECUTABLE("system-sensor" system-sensor.c)
 #TARGET_LINK_LIBRARIES("system-sensor" ${fw_name} ${${fw_test}_LDFLAGS})
