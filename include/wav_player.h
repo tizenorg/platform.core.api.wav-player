@@ -74,9 +74,13 @@ typedef void (*wav_player_playback_completed_cb)(int id, void *user_data);
 
 
 /**
- * @deprecated Deprecated since 2.4. [Use wav_player_start_with_stream_info() instead]
+ * @deprecated Deprecated since 2.4. Use wav_player_start_with_stream_info() instead.
  * @brief Plays a WAV file.
  * @since_tizen 2.3
+ *
+ * @remarks Sound can be mixed with other sounds if you don't control the sound session in sound-manager module since 2.4.\n
+ * 	You can refer to @ref CAPI_MEDIA_SUOND_MANAGER_MODULE.
+ *
  * @param[in] path	The file path to play
  * @param[in] type	The sound type
  * @param[in] callback	The callback function to invoke when a WAV file is finished playing
