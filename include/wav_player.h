@@ -41,7 +41,8 @@ extern "C"
  */
 
 /**
- * @brief Enumerations of error code for WAV player.
+ * @brief Enumeration of error codes for WAV player.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  */
 typedef enum
 {
@@ -65,7 +66,7 @@ typedef enum
 /**
  * @brief Called when a WAV file has finished playing.
  * @details This callback is not invoked by calling wav_player_stop().
- *
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] id	The completed wav player ID
  * @param[in] user_data	The user data passed from the callback registration function
  * @see wav_player_start()
@@ -76,7 +77,7 @@ typedef void (*wav_player_playback_completed_cb)(int id, void *user_data);
 /**
  * @deprecated Deprecated since 2.4. Use wav_player_start_with_stream_info() instead.
  * @brief Plays a WAV file.
- * @since_tizen 2.3
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  *
  * @remarks Sound can be mixed with other sounds if you don't control the sound session in sound-manager module since 2.4.\n
  * 	You can refer to @ref CAPI_MEDIA_SUOND_MANAGER_MODULE.
@@ -87,7 +88,8 @@ typedef void (*wav_player_playback_completed_cb)(int id, void *user_data);
  * @param[in] user_data	The user data to be passed to the callback function
  * @param[out] id	The WAV player ID ( can be set to NULL )
  *
- * @return 0 on success, otherwise a negative error value.
+ * @return @c 0 on success,
+ *         otherwise a negative error value
  * @retval #WAV_PLAYER_ERROR_NONE Successful
  * @retval #WAV_PLAYER_ERROR_INVALID_PARAMETER Invalid parameter 
  * @retval #WAV_PLAYER_ERROR_INVALID_OPERATION Invalid operation
@@ -124,6 +126,8 @@ int wav_player_start_with_stream_info(const char *path, sound_stream_info_h stre
 
 /**
  * @brief Stops playing the WAV file.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+ * @param[in] id  The WAV player ID to stop
  *
  * @param[in] id	The WAV player ID to stop
  *
