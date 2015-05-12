@@ -1,6 +1,6 @@
 Name:       capi-media-wav-player
 Summary:    A wav player library in SLP C API
-Version:    0.1.15
+Version:    0.1.16
 Release:    0
 Group:      Multimedia/API
 License:    Apache-2.0
