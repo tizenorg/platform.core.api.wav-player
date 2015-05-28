@@ -56,13 +56,7 @@ void audio_io_test(){
 
 int main(int argc, char**argv)
 {
-	if( !g_thread_supported() )
-	{
-		g_thread_init(NULL);
-	}
-
-	GError *gerr = NULL;
-	event_thread = g_thread_create(GmainThread, NULL, 1, &gerr);
+	event_thread = g_thread_new("WavPlayerTest", GmainThread, NULL);
 
 	wav_play_test();
 	return 0;
