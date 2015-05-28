@@ -75,7 +75,7 @@ typedef void (*wav_player_playback_completed_cb)(int id, void *user_data);
 
 
 /**
- * @deprecated Deprecated since 2.4. Use wav_player_start_with_stream_info() instead.
+ * @deprecated Deprecated since 3.0. Use wav_player_start_with_stream_info() instead.
  * @brief Plays a WAV file.
  * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  *
@@ -102,7 +102,7 @@ int wav_player_start(const char *path, sound_type_e type, wav_player_playback_co
 
 /**
  * @brief Plays a WAV file with stream information of sound-manager.
- * @since_tizen 2.4
+ * @since_tizen 3.0
  * @param[in] path	The file path to play
  * @param[in] stream_info	The sound stream information handle
  * @param[in] callback	The callback function to be invoked when a WAV file is no longer being played
@@ -127,8 +127,6 @@ int wav_player_start_with_stream_info(const char *path, sound_stream_info_h stre
 /**
  * @brief Stops playing the WAV file.
  * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
- * @param[in] id  The WAV player ID to stop
- *
  * @param[in] id	The WAV player ID to stop
  *
  * @return 0 on success, otherwise a negative error value.
