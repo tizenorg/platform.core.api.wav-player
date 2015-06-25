@@ -11,7 +11,7 @@
 * distributed under the License is distributed on an "AS IS" BASIS,
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the License for the specific language governing permissions and
-* limitations under the License. 
+* limitations under the License.
 */
 
 
@@ -43,7 +43,7 @@ void wav_play_test(){
 	int ret=0;
 	int id;
 	int i;
-	for(i =0 ; i < 100; i++){	
+	for(i =0 ; i < 100; i++){
 		ret = wav_player_start("test.wav", SOUND_TYPE_MEDIA, _player_stop_cb,(void*)i, &id);
 		printf("wav_player_start(%d)(id=%d) ret = %d\n",i,id, ret);
 
@@ -51,18 +51,12 @@ void wav_play_test(){
 }
 
 void audio_io_test(){
-	
+
 }
 
 int main(int argc, char**argv)
 {
-	if( !g_thread_supported() )
-	{
-		g_thread_init(NULL);
-	}
-
-	GError *gerr = NULL;
-	event_thread = g_thread_create(GmainThread, NULL, 1, &gerr);
+	event_thread = g_thread_new("WavPlayerTest", GmainThread, NULL);
 
 	wav_play_test();
 	return 0;
