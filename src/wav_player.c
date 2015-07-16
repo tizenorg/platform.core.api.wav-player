@@ -88,9 +88,14 @@ int wav_player_start_with_stream_info(const char *path, sound_stream_info_h stre
 	_cb_data *cb_data = NULL;
 	char *stream_type = NULL;
 	int stream_id;
+	bool result = false;
 
 	if( path == NULL)
 		return __convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_PARAMETER);
+
+	ret = sound_manager_is_available_stream_information(stream_info, NATIVE_API_WAV_PLAYER, &result);
+	if ( !result )
+		return __convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE);
 
 	ret = sound_manager_get_type_from_stream_information(stream_info, &stream_type);
 	if( ret )
