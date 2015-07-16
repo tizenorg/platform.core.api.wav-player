@@ -38,12 +38,17 @@ void _player_stop_cb(int id, void *user_data){
 }
 
 
-
-void wav_play_test(){
+void wav_play_test(int time){
 	int ret=0;
 	int id;
 	int i;
-	for(i =0 ; i < 100; i++){
+	if(time <= 0) {
+		printf("invalid param : %d\n", time);
+		return;
+	}
+
+	printf("Wav Play %d times\n", time);
+	for(i =0 ; i < time; i++){
 		ret = wav_player_start("test.wav", SOUND_TYPE_MEDIA, _player_stop_cb,(void*)i, &id);
 		printf("wav_player_start(%d)(id=%d) ret = %d\n",i,id, ret);
 
@@ -56,8 +61,13 @@ void audio_io_test(){
 
 int main(int argc, char**argv)
 {
+	int time = 1;
 	event_thread = g_thread_new("WavPlayerTest", GmainThread, NULL);
 
-	wav_play_test();
+	if (argc == 2) {
+		time = atoi(argv[1]);
+	}
+
+	wav_play_test(time);
 	return 0;
 }
