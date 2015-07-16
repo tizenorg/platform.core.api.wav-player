@@ -51,6 +51,9 @@ int __convert_wav_player_error_code(const char *func, int code)
 			ret = WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED;
 			errorstr = "FORMAT_NOT_SUPPORTED";
 			break;
+		case WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE:
+			ret = WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE;
+			break;
 		default:
 			ret = WAV_PLAYER_ERROR_INVALID_OPERATION;
 			errorstr = "INVALID_OPERATION";
