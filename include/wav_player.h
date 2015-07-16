@@ -49,8 +49,8 @@ typedef enum
     WAV_PLAYER_ERROR_NONE                 = TIZEN_ERROR_NONE,                  /**< Successful */
     WAV_PLAYER_ERROR_INVALID_PARAMETER    = TIZEN_ERROR_INVALID_PARAMETER,     /**< Invalid parameter */
     WAV_PLAYER_ERROR_INVALID_OPERATION    = TIZEN_ERROR_INVALID_OPERATION,     /**< Invalid operation */
-    WAV_PLAYER_ERROR_NOT_SUPPORTED        = TIZEN_ERROR_NOT_SUPPORTED,         /**< Not supported (Since 3.0) */
-    WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED = TIZEN_ERROR_WAV_PLAYER | 0x01      /**< Format not supported */
+    WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED = TIZEN_ERROR_WAV_PLAYER | 0x01,     /**< Format not supported */
+    WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE   = TIZEN_ERROR_WAV_PLAYER | 0x02      /**< Not supported (Since 3.0) */
 } wav_player_error_e;
 
 /**
@@ -103,6 +103,9 @@ int wav_player_start(const char *path, sound_type_e type, wav_player_playback_co
 /**
  * @brief Plays a WAV file with stream information of sound-manager.
  * @since_tizen 3.0
+
+*  @remarks Voice Recognition and VOIP stream types are not supported in this API.
+ 
  * @param[in] path	The file path to play
  * @param[in] stream_info	The sound stream information handle
  * @param[in] callback	The callback function to be invoked when a WAV file is no longer being played
@@ -114,7 +117,7 @@ int wav_player_start(const char *path, sound_type_e type, wav_player_playback_co
  * @retval #WAV_PLAYER_ERROR_NONE Successful
  * @retval #WAV_PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
  * @retval #WAV_PLAYER_ERROR_INVALID_OPERATION Invalid operation
- * @retval #WAV_PLAYER_ERROR_NOT_SUPPORTED Not supported
+ * @retval #WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE Not supported stream type
  *
  * @post	It invokes wav_player_playback_completed_cb() when a WAV file is no longer being played.
  * @see wav_player_stop()
