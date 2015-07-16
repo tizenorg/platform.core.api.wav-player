@@ -22,6 +22,10 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
+#include <getopt.h>
+
+#define FILE_PATH_MAX   30
+#define DEFAULT_FILE    "test.wav"
 
 static GMainLoop *g_mainloop = NULL;
 static GThread *event_thread;
@@ -33,31 +37,73 @@ gpointer GmainThread(gpointer data){
 	return NULL;
 }
 
+void help() {
+	printf("Usage : ");
+	printf("multimedia_wav_player_test [OPTION]\n\n"
+		   "  -i, --iterate                 how many time to play\n"
+		   "  -f, --file                    file path to play\n"
+		   "  -h, --help                help\n");
+}
+
 void _player_stop_cb(int id, void *user_data){
 	printf("complete id = %d,%d\n", id, (int)user_data);
 }
 
 
-
-void wav_play_test(){
+void wav_play_test(const char* file_path, int iterate){
 	int ret=0;
 	int id;
 	int i;
-	for(i =0 ; i < 100; i++){
-		ret = wav_player_start("test.wav", SOUND_TYPE_MEDIA, _player_stop_cb,(void*)i, &id);
+	if(iterate <= 0 || file_path == NULL) {
+		printf("invalid param : %d\n", time);
+		return;
+	}
+
+	printf("Play Wav, File Path : %s, Iterate : %d\n", file_path, iterate);
+	for(i =0 ; i < iterate; i++){
+		ret = wav_player_start(file_path, SOUND_TYPE_MEDIA, _player_stop_cb,(void*)i, &id);
 		printf("wav_player_start(%d)(id=%d) ret = %d\n",i,id, ret);
 
 	}
 }
 
-void audio_io_test(){
-
-}
 
 int main(int argc, char**argv)
 {
+	int iterate = 1;
+	char file_path[FILE_PATH_MAX] = DEFAULT_FILE;
+
+	while (1) {
+		int opt;
+		int opt_idx = 0;
+
+		static struct option long_options[] =
+		{
+			{"iterate"    , required_argument, 0, 'i'},
+			{"file"       , required_argument, 0, 'f'},
+			{ 0, 0, 0, 0 }
+		};
+
+		if ((opt = getopt_long(argc, argv, "i:f:", long_options, &opt_idx)) == -1)
+			break;
+
+		switch (opt) {
+			case 'f':
+				strcpy(file_path, optarg);
+				break;
+			case 'i':
+				iterate = atoi(optarg);
+				break;
+			case 'h':
+			default:
+				help();
+				return 0;
+		}
+	}
+
 	event_thread = g_thread_new("WavPlayerTest", GmainThread, NULL);
 
-	wav_play_test();
+	wav_play_test(file_path, iterate);
+
 	return 0;
 }
