@@ -90,7 +90,7 @@ int wav_player_start_with_stream_info(const char *path, sound_stream_info_h stre
 	int stream_id;
 	bool result = false;
 
-	if( path == NULL)
+	if( path == NULL || stream_info == NULL )
 		return __convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_PARAMETER);
 
 	ret = sound_manager_is_available_stream_information(stream_info, NATIVE_API_WAV_PLAYER, &result);
