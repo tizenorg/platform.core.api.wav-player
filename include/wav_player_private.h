@@ -40,7 +40,7 @@ extern "C"
  */
 
 
-typedef struct _cb_data_{
+typedef struct _cb_data_ {
 	wav_player_playback_completed_cb cb;
 	void * user_data;
 } _cb_data;

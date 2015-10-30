@@ -31,36 +31,35 @@ int __convert_wav_player_error_code(const char *func, int code)
 {
 	int ret = WAV_PLAYER_ERROR_INVALID_OPERATION;
 	char *errorstr = NULL;
-	switch(code)
-	{
-		case MM_ERROR_NONE:
-			ret = WAV_PLAYER_ERROR_NONE;
-			errorstr = "ERROR_NONE";
-			break;
-		case MM_ERROR_INVALID_ARGUMENT:
-		case MM_ERROR_SOUND_INVALID_POINTER:
-		case WAV_PLAYER_ERROR_INVALID_PARAMETER:
-			ret = WAV_PLAYER_ERROR_INVALID_PARAMETER;
-			errorstr = "INVALID_PARAMETER";
-			break;
-		case MM_ERROR_SOUND_INTERNAL:
-			ret = WAV_PLAYER_ERROR_INVALID_OPERATION;
-			errorstr = "INVALID_OPERATION";
-			break;
-		case MM_ERROR_SOUND_UNSUPPORTED_MEDIA_TYPE:
-			ret = WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED;
-			errorstr = "FORMAT_NOT_SUPPORTED";
-			break;
-		case WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE:
-			ret = WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE;
-			errorstr = "NOT_SUPPORTED_TYPE";
-			break;
-		default:
-			ret = WAV_PLAYER_ERROR_INVALID_OPERATION;
-			errorstr = "INVALID_OPERATION";
-			break;
+	switch (code) {
+	case MM_ERROR_NONE:
+		ret = WAV_PLAYER_ERROR_NONE;
+		errorstr = "ERROR_NONE";
+		break;
+	case MM_ERROR_INVALID_ARGUMENT:
+	case MM_ERROR_SOUND_INVALID_POINTER:
+	case WAV_PLAYER_ERROR_INVALID_PARAMETER:
+		ret = WAV_PLAYER_ERROR_INVALID_PARAMETER;
+		errorstr = "INVALID_PARAMETER";
+		break;
+	case MM_ERROR_SOUND_INTERNAL:
+		ret = WAV_PLAYER_ERROR_INVALID_OPERATION;
+		errorstr = "INVALID_OPERATION";
+		break;
+	case MM_ERROR_SOUND_UNSUPPORTED_MEDIA_TYPE:
+		ret = WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED;
+		errorstr = "FORMAT_NOT_SUPPORTED";
+		break;
+	case WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE:
+		ret = WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE;
+		errorstr = "NOT_SUPPORTED_TYPE";
+		break;
+	default:
+		ret = WAV_PLAYER_ERROR_INVALID_OPERATION;
+		errorstr = "INVALID_OPERATION";
+		break;
 	}
-	LOGE( "[%s] %s(0x%08x)",func, errorstr, ret);
+	LOGE("[%s] %s(0x%08x)", func, errorstr, ret);
 	return ret;
 }
 
@@ -68,12 +67,13 @@ int __convert_wav_player_error_code(const char *func, int code)
 void __internal_complete_cb(void *user_data, int id)
 {
 	_cb_data * cb_data = (_cb_data*)user_data;
-	if(!cb_data)
+	if (!cb_data)
 		return;
 
-	if( cb_data->cb ){
-		LOGD( "user callback for handle %d call", id);
+	if (cb_data->cb) {
+		LOGD("user callback for handle %d call %p", id, cb_data->cb);
 		cb_data->cb(id, cb_data->user_data);
+		LOGD("is it really here?");
 	}
 	free(cb_data);
 }
