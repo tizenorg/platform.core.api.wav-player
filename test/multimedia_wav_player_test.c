@@ -30,14 +30,16 @@
 static GMainLoop *g_mainloop = NULL;
 static GThread *event_thread;
 
-gpointer GmainThread(gpointer data){
-	g_mainloop = g_main_loop_new (NULL, 0);
-	g_main_loop_run (g_mainloop);
+gpointer GmainThread(gpointer data)
+{
+	g_mainloop = g_main_loop_new(NULL, 0);
+	g_main_loop_run(g_mainloop);
 
 	return NULL;
 }
 
-void help() {
+void help()
+{
 	printf("Usage : ");
 	printf("multimedia_wav_player_test [OPTION]\n\n"
 		   "  -i, --iterate                 how many time to play\n"
@@ -45,24 +47,26 @@ void help() {
 		   "  -h, --help                help\n");
 }
 
-void _player_stop_cb(int id, void *user_data){
+void _player_stop_cb(int id, void *user_data)
+{
 	printf("complete id = %d,%d\n", id, (int)user_data);
 }
 
 
-void wav_play_test(const char* file_path, int iterate){
-	int ret=0;
+void wav_play_test(const char* file_path, int iterate)
+{
+	int ret = 0;
 	int id;
 	int i;
-	if(iterate <= 0 || file_path == NULL) {
+	if (iterate <= 0 || file_path == NULL) {
 		printf("invalid param : %d\n", time);
 		return;
 	}
 
 	printf("Play Wav, File Path : %s, Iterate : %d\n", file_path, iterate);
-	for(i =0 ; i < iterate; i++){
-		ret = wav_player_start(file_path, SOUND_TYPE_MEDIA, _player_stop_cb,(void*)i, &id);
-		printf("wav_player_start(%d)(id=%d) ret = %d\n",i,id, ret);
+	for (i = 0 ; i < iterate; i++) {
+		ret = wav_player_start(file_path, SOUND_TYPE_MEDIA, _player_stop_cb, (void*)i, &id);
+		printf("wav_player_start(%d)(id=%d) ret = %d\n", i, id, ret);
 
 	}
 }
@@ -77,8 +81,7 @@ int main(int argc, char**argv)
 		int opt;
 		int opt_idx = 0;
 
-		static struct option long_options[] =
-		{
+		static struct option long_options[] = {
 			{"iterate"    , required_argument, 0, 'i'},
 			{"file"       , required_argument, 0, 'f'},
 			{ 0, 0, 0, 0 }
@@ -88,16 +91,16 @@ int main(int argc, char**argv)
 			break;
 
 		switch (opt) {
-			case 'f':
-				strcpy(file_path, optarg);
-				break;
-			case 'i':
-				iterate = atoi(optarg);
-				break;
-			case 'h':
-			default:
-				help();
-				return 0;
+		case 'f':
+			strcpy(file_path, optarg);
+			break;
+		case 'i':
+			iterate = atoi(optarg);
+			break;
+		case 'h':
+		default:
+			help();
+			return 0;
 		}
 	}
 
