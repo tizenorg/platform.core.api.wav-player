@@ -45,11 +45,11 @@ extern "C"
  * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  */
 typedef enum {
-    WAV_PLAYER_ERROR_NONE                 = TIZEN_ERROR_NONE,                  /**< Successful */
-    WAV_PLAYER_ERROR_INVALID_PARAMETER    = TIZEN_ERROR_INVALID_PARAMETER,     /**< Invalid parameter */
-    WAV_PLAYER_ERROR_INVALID_OPERATION    = TIZEN_ERROR_INVALID_OPERATION,     /**< Invalid operation */
-    WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED = TIZEN_ERROR_WAV_PLAYER | 0x01,     /**< Format not supported */
-    WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE   = TIZEN_ERROR_WAV_PLAYER | 0x02      /**< Not supported (Since 3.0) */
+	WAV_PLAYER_ERROR_NONE                 = TIZEN_ERROR_NONE,                  /**< Successful */
+	WAV_PLAYER_ERROR_INVALID_PARAMETER    = TIZEN_ERROR_INVALID_PARAMETER,     /**< Invalid parameter */
+	WAV_PLAYER_ERROR_INVALID_OPERATION    = TIZEN_ERROR_INVALID_OPERATION,     /**< Invalid operation */
+	WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED = TIZEN_ERROR_WAV_PLAYER | 0x01,     /**< Format not supported */
+	WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE   = TIZEN_ERROR_WAV_PLAYER | 0x02      /**< Not supported (Since 3.0) */
 } wav_player_error_e;
 
 /**
@@ -79,7 +79,7 @@ typedef void (*wav_player_playback_completed_cb)(int id, void *user_data);
  * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  *
  * @remarks Sound can be mixed with other sounds if you don't control the sound session in sound-manager module since 3.0.\n
- * 	You can refer to @ref CAPI_MEDIA_SUOND_MANAGER_MODULE.
+ *	You can refer to @ref CAPI_MEDIA_SUOND_MANAGER_MODULE.
  *
  * @param[in] path	The file path to play
  * @param[in] type	The sound type
