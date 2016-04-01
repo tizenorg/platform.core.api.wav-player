@@ -17,14 +17,14 @@ SET(Services
 # project
 SET(project_prefix "capi")
 SET(prefix "/usr")
-SET(version "0.0.1")
-SET(maintainer "Seungkeun Lee <sngn.lee@samsung.com>, Kangho Hur<kagho.hur@samsung.com>")
+SET(version ${FULLVER})
+SET(maintainer "Seungbae Shin <seungbae.shin@samsung.com>")
 SET(description "A wav player library in Tizen Native API")
 SET(service "media")
 SET(submodule "wav-player")
 
 # for package file
-SET(dependents "mm-sound dlog capi-base-common capi-media-sound-manager")
+SET(dependents "dlog capi-base-common capi-media-sound-manager mused")
 SET(pc_dependents "capi-base-common capi-media-sound-manager")
 
 SET(fw_name "${project_prefix}-${service}-${submodule}")
@@ -87,16 +87,16 @@ CONFIGURE_FILE(
 )
 INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${fw_name}.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)
 
-#ADD_SUBDIRECTORY(test)
+ADD_SUBDIRECTORY(test)
 
 IF(UNIX)
 
 ADD_CUSTOM_TARGET (distclean @echo cleaning for source distribution)
 ADD_CUSTOM_COMMAND(
-        DEPENDS clean 
+        DEPENDS clean
         COMMENT "distribution clean"
         COMMAND find
-        ARGS    . 
+        ARGS    .
         -not -name config.cmake -and \(
         -name tester.c -or
         -name Testing -or
