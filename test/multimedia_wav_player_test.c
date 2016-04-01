@@ -29,13 +29,11 @@
 
 static GMainLoop *g_mainloop = NULL;
 static GThread *event_thread;
+int id;
 
 gpointer GmainThread(gpointer data)
 {
-	g_mainloop = g_main_loop_new(NULL, 0);
-	g_main_loop_run(g_mainloop);
 
-	return NULL;
 }
 
 void help()
@@ -50,13 +48,15 @@ void help()
 void _player_stop_cb(int id, void *user_data)
 {
 	printf("complete id = %d,%d\n", id, (int)user_data);
+
+	g_main_loop_quit(g_mainloop);
 }
 
 
 void wav_play_test(const char* file_path, int iterate)
 {
 	int ret = 0;
-	int id;
+
 	int i;
 	if (iterate <= 0 || file_path == NULL) {
 		printf("invalid param : %d\n", time);
@@ -66,9 +66,17 @@ void wav_play_test(const char* file_path, int iterate)
 	printf("Play Wav, File Path : %s, Iterate : %d\n", file_path, iterate);
 	for (i = 0 ; i < iterate; i++) {
 		ret = wav_player_start(file_path, SOUND_TYPE_MEDIA, _player_stop_cb, (void*)i, &id);
-		printf("wav_player_start(%d)(id=%d) ret = %d\n", i, id, ret);
+		printf("wav_player_start(%d)(id=%d) ret = 0x%x\n", i, id, ret);
 
 	}
+}
+
+static gboolean _timeout_cb(gpointer user_data)
+{
+	int ret = wav_player_stop(id);
+	printf("wav_player_stop(id=%d) ret = 0x%x\n", id, ret);
+	g_main_loop_quit(g_mainloop);
+	return FALSE;
 }
 
 
@@ -104,9 +112,17 @@ int main(int argc, char**argv)
 		}
 	}
 
-	event_thread = g_thread_new("WavPlayerTest", GmainThread, NULL);
+//	event_thread = g_thread_new("WavPlayerTest", GmainThread, NULL);
+
+	g_mainloop = g_main_loop_new(NULL, 0);
 
 	wav_play_test(file_path, iterate);
+
+	g_timeout_add(5000, _timeout_cb, NULL);
+
+	g_main_loop_run(g_mainloop);
+
+	//g_thread_join(event_thread);
 
 	return 0;
 }
