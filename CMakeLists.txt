@@ -24,7 +24,7 @@ SET(service "media")
 SET(submodule "wav-player")
 
 # for package file
-SET(dependents "mm-sound dlog capi-base-common capi-media-sound-manager")
+SET(dependents "mm-sound dlog capi-base-common capi-media-sound-manager mused")
 SET(pc_dependents "capi-base-common capi-media-sound-manager")
 
 SET(fw_name "${project_prefix}-${service}-${submodule}")
@@ -87,7 +87,7 @@ CONFIGURE_FILE(
 )
 INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${fw_name}.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)
 
-#ADD_SUBDIRECTORY(test)
+ADD_SUBDIRECTORY(test)
 
 IF(UNIX)
 
