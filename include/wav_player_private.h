@@ -39,12 +39,6 @@ extern "C"
  * @{
  */
 
-
-typedef struct _cb_data_ {
-	wav_player_playback_completed_cb cb;
-	void * user_data;
-} _cb_data;
-
 /**
  * @}
  */
@@ -52,8 +46,5 @@ typedef struct _cb_data_ {
 #ifdef __cplusplus
 }
 #endif
-
-int __convert_wav_player_error_code(const char *func, int code);
-void __internal_complete_cb(void *user_data, int id);
 
 #endif /* __TIZEN_MEDIA_WAV_PLAYER_PRIVATE_H__ */
