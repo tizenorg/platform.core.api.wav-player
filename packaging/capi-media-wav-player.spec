@@ -1,6 +1,6 @@
 Name:       capi-media-wav-player
 Summary:    A wav player library in Tizen C API
-Version:    0.1.17
+Version:    0.1.18
 Release:    0
 Group:      Multimedia/API
 License:    Apache-2.0
@@ -33,6 +33,8 @@ MAJORVER=`echo %{version} | awk 'BEGIN {FS="."}{print $1}'`
 %__make %{?jobs:-j%jobs}
 
 %install
+mkdir -p %{buildroot}/usr/bin
+cp test/wav_player_test %{buildroot}/usr/bin
 %make_install
 
 %post -p /sbin/ldconfig
@@ -43,6 +45,7 @@ MAJORVER=`echo %{version} | awk 'BEGIN {FS="."}{print $1}'`
 %manifest %{name}.manifest
 %license LICENSE.APLv2
 %{_libdir}/libcapi-media-wav-player.so.*
+/usr/bin/wav_player_test
 
 %files devel
 %manifest %{name}.manifest
