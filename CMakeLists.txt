@@ -18,7 +18,7 @@ SET(Services
 SET(project_prefix "capi")
 SET(prefix "/usr")
 SET(version "0.0.1")
-SET(maintainer "Seungkeun Lee <sngn.lee@samsung.com>, Kangho Hur<kagho.hur@samsung.com>")
+SET(maintainer "Seungbae Shin <seungbae.shin@samsung.com>, Sangchul Lee <sc11.lee@samsung.com>, Jeongho Mok <jho.mok@samsung.com>")
 SET(description "A wav player library in Tizen Native API")
 SET(service "media")
 SET(submodule "wav-player")

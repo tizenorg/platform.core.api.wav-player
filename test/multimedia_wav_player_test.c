@@ -59,7 +59,7 @@ void wav_play_test(const char* file_path, int iterate)
 	int id;
 	int i;
 	if (iterate <= 0 || file_path == NULL) {
-		printf("invalid param : %d\n", time);
+		printf("invalid param\n");
 		return;
 	}
 

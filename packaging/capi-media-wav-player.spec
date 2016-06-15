@@ -1,6 +1,6 @@
 Name:       capi-media-wav-player
 Summary:    A wav player library in Tizen C API
-Version:    0.1.17
+Version:    0.1.18
 Release:    0
 Group:      Multimedia/API
 License:    Apache-2.0
