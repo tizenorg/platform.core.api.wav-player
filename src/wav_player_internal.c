@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2011 Samsung Electronics Co., Ltd All Rights Reserved
+* Copyright (c) 2016 Samsung Electronics Co., Ltd All Rights Reserved
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -30,53 +30,7 @@
 #include "wav_player_private.h"
 #include <stdlib.h>
 
-
-int wav_player_start(const char *path, sound_type_e type, wav_player_playback_completed_cb cb, void *user_data,  int * id)
-{
-	int ret = MM_ERROR_NONE;
-	int player = -1;
-	char m_path[PATH_MAX];
-	void (*_completed_cb)(void *, int);
-	_completed_cb = NULL;
-	_cb_data *cb_data = NULL;
-
-
-	if (path == NULL)
-		return __convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_PARAMETER);
-
-	if (type < SOUND_TYPE_SYSTEM || type >= SOUND_TYPE_NUM)
-		return __convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_PARAMETER);
-
-	m_path[0] = '\0';
-	if (path[0] != '/') {
-
-		if (getcwd(m_path, PATH_MAX) != NULL)
-			strncat(m_path, "/", PATH_MAX-strlen(m_path));
-	}
-	strncat(m_path, path, PATH_MAX-strlen(m_path));
-
-	if (cb) {
-		_completed_cb = __internal_complete_cb;
-		cb_data = (_cb_data *)malloc(sizeof(_cb_data));
-		if (cb_data == NULL)
-			return __convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_OPERATION);
-		cb_data->cb = cb;
-		cb_data->user_data = user_data;
-	}
-
-
-	ret = mm_sound_play_sound(m_path, type, _completed_cb , cb_data, &player);
-
-	if (ret == 0 && id != NULL)
-		*id = player;
-
-	if (ret != 0 && cb_data != NULL)
-		free(cb_data);
-
-	return __convert_wav_player_error_code(__func__, ret);
-}
-
-int wav_player_start_with_stream_info(const char *path, sound_stream_info_h stream_info, wav_player_playback_completed_cb cb, void *user_data, int *id)
+int wav_player_start_loop(const char *path, sound_stream_info_h stream_info, unsigned int loop_count, wav_player_playback_completed_cb callback, void *user_data, int *id)
 {
 	int ret = MM_ERROR_NONE;
 	int player = -1;
@@ -110,17 +64,16 @@ int wav_player_start_with_stream_info(const char *path, sound_stream_info_h stre
 	}
 	strncat(m_path, path, PATH_MAX-strlen(m_path));
 
-	if (cb) {
+	if (callback) {
 		_completed_cb = __internal_complete_cb;
 		cb_data = (_cb_data *)malloc(sizeof(_cb_data));
 		if (cb_data == NULL)
 			return __convert_wav_player_error_code(__func__, WAV_PLAYER_ERROR_INVALID_OPERATION);
-		cb_data->cb = cb;
+		cb_data->cb = callback;
 		cb_data->user_data = user_data;
 	}
 
-
-	ret = mm_sound_play_sound_with_stream_info(m_path, stream_type, stream_id, 1, _completed_cb , cb_data, &player);
+	ret = mm_sound_play_sound_with_stream_info(m_path, stream_type, stream_id, loop_count, _completed_cb , cb_data, &player);
 
 	if (ret == 0 && id != NULL)
 		*id = player;
@@ -129,11 +82,4 @@ int wav_player_start_with_stream_info(const char *path, sound_stream_info_h stre
 		free(cb_data);
 
 	return __convert_wav_player_error_code(__func__, ret);
-
 }
-
-int wav_player_stop(int id)
-{
-	return __convert_wav_player_error_code(__func__, mm_sound_stop_sound(id));
-}
-
