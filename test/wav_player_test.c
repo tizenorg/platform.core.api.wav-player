@@ -100,7 +100,8 @@ int main(int argc, char**argv)
 
 		switch (opt) {
 		case 'f':
-			strcpy(file_path, optarg);
+			strncpy(file_path, optarg, FILE_PATH_MAX - 1);
+			file_path[FILE_PATH_MAX - 1] = '\0';
 			break;
 		case 'i':
 			iterate = atoi(optarg);
